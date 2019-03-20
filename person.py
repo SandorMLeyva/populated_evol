@@ -76,6 +76,11 @@ class Person:
 	def generate_uniform_var(self):
 		return np.random.uniform()
 
+	@property
+	def generate_exp_var(self):
+		# TODO implementar la exponecial con el metodo de la transformada inversa
+		return np.random.exponential()
+
 
 class Woman(Person):
 	def __init__(self, age, birthday_month):
