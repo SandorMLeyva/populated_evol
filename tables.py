@@ -49,10 +49,12 @@ TIME_OFF = {
 	125: 48
 }
 
+# TODO cualquier problema arreglar la tabla
 NUMBER_BABY = {
-	1: 0.7,
-	2: 0.18,
-	3: 0.08,
-	4: 0.04,
-	5: 0.02
+	0.7: 1,
+	0.18: 2,
+	0.08: 3,
+	0.04: 4,
+	0.5: 5
 }
+
