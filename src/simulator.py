@@ -37,8 +37,6 @@ class Simulator:
     def sim(self):
 
         while self.t <= self.Tf and len(self.population) > 0:
-            if self.t > 1200:
-                print('siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
             event = self.events.ext_min()
             person = event.person
             self.t = event.time
@@ -61,7 +59,6 @@ class Simulator:
                             self.woman += 1
                             self.woman_t += 1
                         self.collector.analize(child, 2, self.t)
-                    # print('[Nace %s ninnos]' % len(childs))
                 else:
                     person.end_time_out()
 
@@ -76,13 +73,11 @@ class Simulator:
                     if person.partner is not None:
                         self.events.insert(Event(person.partner, 2, person.partner.time_out + self.t))
                     self.population.remove(person)
-                    # print('Muere %s con %s annos y %s hijos' % ('Hombre' if person.gender else 'Mujer', person.age, person.children))
                 else:
 
                     breaking, ex = person.breaking_off()
                     if breaking:
                         self.collector.analize(person, 3, self.t)
-                        # print('Se rompio una pareja y tienen %s y %s de luto' % (person.time_out, ex.time_out))
                         self.events.insert(Event(person, 2, self.t + person.time_out))
                         self.events.insert(Event(ex, 2, self.t + ex.time_out))
 
@@ -92,10 +87,8 @@ class Simulator:
                         new_match = person.get_partner(p)
                         if new_match:
                             self.collector.analize(person, 4, self.t)
-                            # print('Hay una nueva pareja')
 
                     if not person.gender and person.partner is not None and person.pregnancy():
-                        # print('Una mujer quedo embarazada')
                         self.events.insert(Event(person, 1, 9 + self.t))
 
         print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
