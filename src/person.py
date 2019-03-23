@@ -56,8 +56,7 @@ class Person:
         # En caso de que muera y tenia pareja, actualizar a su pareja
         if self.dead and self.partner is not None:
             self.partner.partner = None
-            # TODO fixed arreglar self.partner.time_out  pq hay que generar la variable exponencial
-            self.partner.time_out = int(self.generate_exp_var(TIME_OFF[get_key_by_age(self.age, TIME_OFF)]))
+            self.partner.time_out = int(self.generate_exp_var(1/TIME_OFF[get_key_by_age(self.age, TIME_OFF)]))
 
         return self.dead
 
@@ -88,11 +87,9 @@ class Person:
         p = self.partner
         if breaking:
             self.partner.partner = None
-            # TODO fixed arreglar self.partner.time_out  pq hay que generar la variable exponencial
-            self.partner.time_out = int(self.generate_exp_var(TIME_OFF[get_key_by_age(self.partner.age, TIME_OFF)]))
+            self.partner.time_out = int(self.generate_exp_var(1/TIME_OFF[get_key_by_age(self.partner.age, TIME_OFF)]))
             self.partner = None
-            # TODO fixed arreglar esta variable tambien
-            self.time_out = int(self.generate_exp_var(TIME_OFF[get_key_by_age(self.age, TIME_OFF)]))
+            self.time_out = int(self.generate_exp_var(1/TIME_OFF[get_key_by_age(self.age, TIME_OFF)]))
         return breaking, p
 
     def birthday(self, month):
@@ -113,10 +110,9 @@ class Person:
     def generate_uniform_var(self):
         return np.random.uniform()
 
-    # TODO ver bien que parametros son los buenos puse 1/lambda pq es lo que mejores resultados me daba
     @staticmethod
     def generate_exp_var(lambd):
-        return abs(-(1 / (1/lambd)) * np.log(np.random.uniform()))
+        return abs(-(1 / lambd) * np.log(np.random.uniform()))
 
 
 class Woman(Person):
