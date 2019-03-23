@@ -35,12 +35,11 @@ class Simulator:
         self.population = sample(self.population, woman + man)
 
     def sim(self):
-
+        # Model
         while self.t <= self.Tf and len(self.population) > 0:
             event = self.events.ext_min()
             person = event.person
             self.t = event.time
-            # print('Mes', self.t)
             if not person.dead:
                 # Birthday
                 if event.type_event == 0:
@@ -96,6 +95,8 @@ class Simulator:
         print('hubo un maximo de %s personas en el poblado, %s mujeres y %s hombres' % (
         str(self.man_t + self.woman_t), self.woman_t, self.man_t))
         print('La simulacion termino en %s meses' % self.t)
+
+        return self.collector
 
 
 
