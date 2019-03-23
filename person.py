@@ -115,7 +115,7 @@ class Person:
 
     @staticmethod
     def generate_exp_var(lambd):
-        return -(1 / lambd) * np.log(np.random.uniform())
+        return abs(-(1 / (1/lambd)) * np.log(np.random.uniform()))
 
 
 class Woman(Person):
