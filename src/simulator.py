@@ -1,7 +1,7 @@
 from src.person import *
 from random import sample
 from src.heap import *
-
+from src.analizer import Collector
 
 class Simulator:
     def __init__(self):
@@ -13,6 +13,7 @@ class Simulator:
         self.woman = 0
         self.man_t = 0
         self.woman_t = 0
+        self.collector = Collector()
 
     def build(self, woman: int, man: int, time):
         self.t = 0
@@ -40,7 +41,7 @@ class Simulator:
             event = self.events.ext_min()
             person = event.person
             self.t = event.time
-            print('Mes', self.t)
+            # print('Mes', self.t)
             if not person.dead:
                 # Birthday
                 if event.type_event == 0:
@@ -58,8 +59,8 @@ class Simulator:
                         else:
                             self.woman += 1
                             self.woman_t += 1
-
-                    print('[Nace %s ninnos]' % len(childs))
+                        self.collector.analize(child, 2, self.t)
+                    # print('[Nace %s ninnos]' % len(childs))
                 else:
                     person.end_time_out()
 
@@ -69,28 +70,31 @@ class Simulator:
                         self.man -= 1
                     else:
                         self.woman -= 1
+                    self.collector.analize(person, 1, self.t)
 
                     if person.partner is not None:
                         self.events.insert(Event(person.partner, 2, person.partner.time_out + self.t))
                     self.population.remove(person)
-                    print('Muere %s con %s annos y %s hijos' % (
-                    'Hombre' if person.gender else 'Mujer', person.age, person.children))
+                    # print('Muere %s con %s annos y %s hijos' % ('Hombre' if person.gender else 'Mujer', person.age, person.children))
                 else:
 
                     breaking, ex = person.breaking_off()
                     if breaking:
-                        print('Se rompio una pareja y tienen %s y %s de luto' % (person.time_out, ex.time_out))
+                        self.collector.analize(person, 3, self.t)
+                        # print('Se rompio una pareja y tienen %s y %s de luto' % (person.time_out, ex.time_out))
                         self.events.insert(Event(person, 2, self.t + person.time_out))
                         self.events.insert(Event(ex, 2, self.t + ex.time_out))
 
+                    # Formar nueva pareja
                     self.population = sample(self.population, len(self.population))
                     for p in self.population:
                         new_match = person.get_partner(p)
                         if new_match:
-                            print('Hay una nueva pareja')
+                            self.collector.analize(person, 4, self.t)
+                            # print('Hay una nueva pareja')
 
                     if not person.gender and person.partner is not None and person.pregnancy():
-                        print('Una mujer quedo embarazada')
+                        # print('Una mujer quedo embarazada')
                         self.events.insert(Event(person, 1, 9 + self.t))
 
         print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
