@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
@@ -7,12 +7,27 @@
 </head>
 <body>
 
+    <div id="app">
+        <h1 v-on:click="chart_woman()">click aqui para las mujeres</h1>
+        <h1 v-on:click="chart_man()">click aqui para los hombres</h1>
+        <h1 v-on:click="death_by_age()">muerte por edad del anno [[ year ]]</h1>
+        <h1 v-on:click="next_year()">[[ year ]]</h1>
+        <h1 v-on:click="borns_man()">Nacidos hombres</h1>
+        <h1 v-on:click="borns_woman()">Nacidos mujeres</h1>
 
-    <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/axios.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <woman_death></woman_death>
+        <man_death></man_death>
+        <man_born></man_born>
+        <woman_born></woman_born>
+        <death_by_age></death_by_age>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/Chart.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/vue.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/axios.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" type="text/javascript"></script>
 
 </body>
 </html>

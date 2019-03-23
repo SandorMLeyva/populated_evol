@@ -45,8 +45,8 @@ class Person:
 		:return: boolean
 		'''
         self.dead = False
-        if self.age > 125 + int(np.random.uniform(0, 15)):
-            self.dead = True
+        if self.age > 125:
+            self.dead = 0.88 > np.random.uniform(0,1)
 
         if not self.dead:
             prob = DEATH[get_key_by_age(self.age, DEATH)]

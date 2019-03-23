@@ -10,6 +10,8 @@ class Collector:
 		self.g_man_death = []
 		self.woman = 0
 		self.man = 0
+		self.g_woman = []
+		self.g_man = []
 		self.dead_by_age = {}
 		self.g_y_dead_by_age = []
 		self.g_dead_by_age = {}
@@ -88,6 +90,9 @@ class Collector:
 		self.g_man_death.append(self.man_death)
 
 		self.g_y_dead_by_age.append(self.dead_by_age)
+
+		self.g_woman.append(self.woman)
+		self.g_man.append(self.man)
 
 		self.g_broken_partners += self.broken_partners
 		self.g_lovers += self.lovers

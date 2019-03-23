@@ -1,3 +1,7 @@
+
+
+
+
 # Informe de Simulación 
 
 ## Eventos discretos
@@ -11,7 +15,83 @@
 
 ## Problema
 
-​					
+Se dese conocer la evolución de la población de una determinada región. Se conoce que la probabilidad de fallecer de una persona distribuye uniforme y se corresponde, según su edad y sexo, con la siguiente tabla:
+
+|  Edad  | Hombre | Mujer |
+| :----: | :----: | :---: |
+|  0-12  |  0.25  | 0.25  |
+| 12-45  |  0.1   | 0.15  |
+| 45-76  |  0.3   | 0.35  |
+| 76-125 |  0.7   | 0.65  |
+
+Del mismo modo, se conoce que la probabilidad de una mujer se embarace es uniforme y está relacionada con la edad:
+
+|  Edad  | Probabilidad Embarazarce |
+| :----: | :----------------------: |
+| 12-15  |           0.2            |
+| 15-21  |           0.45           |
+| 21-35  |           0.8            |
+| 35-45  |           0.4            |
+| 45-60  |           0.2            |
+| 60-125 |           0.05           |
+
+Para que una mujer quede embarazada debe tener pareja y no haber tenido el número máximo de hijos que deseaba tener ella o su pareja en ese momento. El número de hijos que cada persona desea tener distribuye uniforme según la tabla siguiente:
+
+| Número | Probabilidad |
+| :----: | :----------: |
+|   1    |     0.6      |
+|   2    |     0.75     |
+|   3    |     0.35     |
+|   4    |     0.2      |
+|   5    |     0.1      |
+|  + 5   |     0.05     |
+
+Para que dos personas sean pareja deben estar solas en ese instante y deben desear tener pareja. El desear tener pareja está relacionado con la edad:
+
+|  Edad  | Probabilidad de querer pareja |
+| :----: | :---------------------------: |
+| 12-15  |              0.6              |
+| 15-21  |             0.65              |
+| 21-35  |              0.8              |
+| 35-45  |              0.6              |
+| 45-60  |              0.5              |
+| 60-125 |              0.2              |
+
+Si dos personas de diferente sexo están solas y ambas desean querer tener parejas entonces la probabilidad de volverse pareja está relacionada con la diferencia de edad: 
+
+| Diferencia de Edad | Probabilidad Establecer Pareja |
+| :----------------: | :----------------------------: |
+|        0-5         |              0.45              |
+|        5-10        |              0.4               |
+|       10-15        |              0.35              |
+|       15-20        |              0.25              |
+|        +20         |              0.15              |
+
+Cuando dos personas están en pareja la probabilidad de que ocurra una ruptura distribuye uniforme y es de 0.2. Cuando una persona se separa, o enviuda, necesita estar sola por un período de tiempo que distribuye exponencial con un parámetro que está relacionado con la edad:
+
+|  Edad  |  lambda  |
+| :----: | :------: |
+| 12-15  | 3 meses  |
+| 15-21  | 6 meses  |
+| 21-35  | 6 meses  |
+| 35-45  | 12 meses |
+| 45-60  | 24 meses |
+| 60-125 | 48 meses |
+
+Cuando están dadas todas las condiciones y una mujer queda embarazada puede tener o no un embarazo múltiple y esto distribuye uniforme acorde a las probabilidades siguientes:
+
+| Número de Bebés | Probabilidad |
+| :-------------: | :----------: |
+|        1        |     0.7      |
+|        2        |     0.16     |
+|        3        |     0.08     |
+|        4        |     0.04     |
+|        5        |     0.02     |
+
+
+
+La probabilidad del sexo de cada bebé nacido es uniforme 0,5. Asumiendo que se tiene una población inicial de M mujeres y H hombres y que cada poblador, en el instante incial, tiene una edad que distribuye uniforme (U(0,100). Realice un proceso de simulación para determinar como evoluciona la población en un per´ıodo de 100 años.
+
 
 
 ## Ideas
@@ -126,8 +206,32 @@ Metodo1:
 
 ## Consideraciones
 
+Algunos aspectos a tener en cuenta sobre la implementación del modelo son:
+
+- La edad máxima de una persona
+  - Esta es 126 años, pero se tiene en cuenta que pueda vivir unos años mas, ya que cuando se comprueba si el individuo va a morir y tiene 126 años, este no muere automáticamente, sino que el individuo pasa a tener probabilidad 0.88 de morir, lo cual se aproxima bastante a la realidad
+
 Después de un gran número de simulaciones, se ha observado que los resultados finales siguen un orden. Un ejemplo de esto es que se hicieron varias pruebas para ver como se comportaba el número total de personas que habían vivido en el poblado, para **200 mujeres** y **200 hombres**  durante **10 años** después de **71 simulaciones** los resultados tenían una desviación estandar de 13.932 aproximadamente y luego de **191** simulaciones su desviación estandar era de 12.815 aproximadamente, lo que significa que la dispersión de los resultados con respecto a la media no es están grande. 
 
 Si comprobamos con el resto de los resultados, podremos apreciar que la desviación estandar va a seguir siendo bastante baja.
 
 Este es solo un ejemplo, con el software vamos a poder verificar estos resultados e incluso cambiar los parámetros para ver los distintos comportamientos de la población.
+
+
+
+## Ejecución del Software
+
+Para poder correr el software es necesario tener instalado la librería **numpy**
+
+Si lo corremos **sin parámetros** vamos a simular una población de **500 mujeres y 500 hombres durante 100 años**
+
+```bash
+python3 main.py
+```
+
+Los parametros van en el mismo orden <mujers> <hombres> <tiempo maximo de simulacion>
+
+```
+python3 main.py 500 500 100
+```
+
