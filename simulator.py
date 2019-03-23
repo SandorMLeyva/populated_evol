@@ -1,19 +1,6 @@
 from person import *
 from random import sample
-
-class Heap:
-    def __init__(self):
-        self.data = []
-
-    def insert(self, item):
-        self.data.append(item)
-        self.data.sort(key= lambda x: x.time)
-
-    def ext_min(self):
-        return self.data.pop(0)
-
-    def is_empty(self):
-        return len(self.data) == 0
+from heap import *
 
 class Simulator:
     def __init__(self):
@@ -49,8 +36,6 @@ class Simulator:
             person = event.person
             self.t = event.time
 
-            # TODO activar a cada persona ver cual es el mejor lugar que no coincida con nada mas
-            # TODO comprobar que el evento no es de una persona muerta,
             if not person.dead:
                 # Birthday
                 if event.type_event == 0:
@@ -62,7 +47,7 @@ class Simulator:
                     for child in childs:
                         self.events.insert(Event(child, 0, self.t+12))
                         self.population.append(child)
-                    print('nacieron', len(childs))
+                    print('nacieron++++++++++++++++', len(childs))
                 else:
                     person.end_time_out()
 
@@ -86,10 +71,10 @@ class Simulator:
                         self.events.insert(Event(person, 1, 9+self.t))
             # print('poblacion', len(self.population))
         print('termino con poblacion',len(self.population))
-
+        print('tiempo', self.t)
 
 
 
 s = Simulator()
-s.build(5,5,12)
+s.build(5, 5, 400)
 s.sim()
