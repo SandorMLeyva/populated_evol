@@ -1,5 +1,5 @@
 import numpy as np
-from tables import *
+from src.tables import *
 
 
 def get_key_by_age(age, table):

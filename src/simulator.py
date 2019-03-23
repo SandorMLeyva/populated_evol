@@ -1,6 +1,6 @@
-from person import *
+from src.person import *
 from random import sample
-from heap import *
+from src.heap import *
 
 
 class Simulator:
@@ -100,6 +100,4 @@ class Simulator:
         print('La simulacion termino en %s meses' % self.t)
 
 
-s = Simulator()
-s.build(50, 50, 400)
-s.sim()
+
