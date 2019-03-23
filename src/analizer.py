@@ -5,10 +5,13 @@ class Collector:
 
 	def __init__(self):
 		self.woman_death = 0
+		self.g_woman_death = []
 		self.man_death = 0
+		self.g_man_death = []
 		self.woman = 0
 		self.man = 0
 		self.dead_by_age = {}
+		self.g_y_dead_by_age = []
 		self.g_dead_by_age = {}
 		self.broken_partners = 0
 		self.g_broken_partners = 0
@@ -18,7 +21,7 @@ class Collector:
 		self.g_time_out_by_age = {}
 		self.lovers = 0
 		self.g_lovers = 0
-		self.g_t = 0
+		self.g_t = 1
 		self.current_t = 0
 
 	def analize(self, person: Person, type_, t):
@@ -34,7 +37,8 @@ class Collector:
 
 		# TODO falta poner los tiempos de luto
 
-		if not t % 12 and self.current_t != t:
+		if  int(t / 12) != self.current_t:
+			self.current_t = int(t/12)
 			# TODO guarda en bd con el anno de los datos recogidos
 			self.close_year(t)
 
@@ -70,9 +74,7 @@ class Collector:
 
 	def close_year(self, t):
 
-		self.g_t += 1
-		self.current_t = t
-		print('Anno', self.g_t)
+		print('Anno', self.current_t)
 		print('meses', t)
 		print('Nacieron %s mujeres y %s hombres' % (self.woman, self.man))
 		print('Murieron %s mujeres y %s hombres' % (self.woman_death, self.man_death))
@@ -81,6 +83,11 @@ class Collector:
 		print('Numero de parejas formadas', self.lovers)
 		print('Numero de rupturas', self.broken_partners)
 		print('Tiempo de espera de las parejas', self.time_out_by_age)
+
+		self.g_woman_death.append(self.woman_death)
+		self.g_man_death.append(self.man_death)
+
+		self.g_y_dead_by_age.append(self.dead_by_age)
 
 		self.g_broken_partners += self.broken_partners
 		self.g_lovers += self.lovers
