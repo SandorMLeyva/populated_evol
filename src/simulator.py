@@ -96,6 +96,8 @@ class Simulator:
         str(self.man_t + self.woman_t), self.woman_t, self.man_t))
         print('La simulacion termino en %s meses' % self.t)
 
+        self.collector.end_simulation(len(self.population), self.woman, self.man, self.t)
+
         return self.collector
 
 

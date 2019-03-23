@@ -137,9 +137,14 @@ app = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     data: {
-        year: 1
+        year: 1,
+        final: 0,
+        woman: 0,
+        man: 0,
+        months: 0
     },
     mounted: function () {
+        this.summary();
         this.death_woman();
         this.death_man();
         this.death_by_age(this.year);
@@ -153,8 +158,19 @@ app = new Vue({
         this.timeout(this.year);
         this.max_born();
         this.max_death();
+
     },
     methods: {
+        summary: () =>{
+             axios.get('/summary').then(
+                response => {
+                    app.final = response.data.final;
+                    app.woman = response.data.woman;
+                    app.man = response.data.man;
+                    app.months = response.data.months;
+                }
+            );
+        },
         death_woman: () => {
             axios.get('/death/female').then(
                 response => {

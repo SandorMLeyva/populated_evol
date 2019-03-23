@@ -142,3 +142,11 @@ def max_death():
 		'data': app.data.max_y_death_persons
 	})
 
+@app.route('/summary')
+def summary():
+	return jsonify({
+		'final': app.data.population,
+		'woman': app.data.w,
+		'man': app.data.m,
+		'months': app.data.month,
+	})

@@ -17,7 +17,7 @@ def main():
 	if argv.count('graph'):
 		from app import app
 		app.data = collector
-		app.run(host='0.0.0.0', port=80, debug=False)
+		app.run(host='0.0.0.0', port=8000, debug=False)
 
 
 if __name__ == '__main__':

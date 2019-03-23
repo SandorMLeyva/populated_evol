@@ -23,14 +23,18 @@ class Collector:
 		self.g_broken_partners_by_dead = []
 		self.time_out_by_age = {}
 		self.g_y_time_out_by_age = []
-		self.g_time_out_by_age = {}
 		self.lovers = 0
 		self.g_lovers = []
-		self.g_t = 1
 		self.current_t = 0
 		self.important_years = []
 		self.max_y_live_persons = []
 		self.max_y_death_persons = []
+
+	def end_simulation(self, population, woman, man, months):
+		self.population = population
+		self.w = woman
+		self.m = man
+		self.month = months
 
 	def analize(self, person: Person, type_, t):
 		'''
@@ -43,7 +47,6 @@ class Collector:
         :return:
         '''
 
-		# TODO falta poner los tiempos de luto
 
 		if  int(t / 12) != self.current_t:
 			self.current_t = int(t/12)
