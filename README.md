@@ -235,3 +235,13 @@ Los parametros van en el mismo orden <mujers> <hombres> <tiempo maximo de simula
 python3 main.py 500 500 100
 ```
 
+Para levantar el servidor web para tener un resumen mas detallados de los datos de la simulación debe pasar el parametro **graph** al final de la linea, debe tener instalado **flask**.
+
+```
+python3 main.py graph
+
+
+# si desea pasarle los parametros de la población 
+
+python3 main.py 500 500 graph
+```

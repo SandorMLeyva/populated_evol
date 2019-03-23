@@ -10,21 +10,27 @@ class Collector:
 		self.g_man_death = []
 		self.woman = 0
 		self.man = 0
+		self.woman_count = 0
+		self.man_count = 0
 		self.g_woman = []
 		self.g_man = []
 		self.dead_by_age = {}
 		self.g_y_dead_by_age = []
 		self.g_dead_by_age = {}
 		self.broken_partners = 0
-		self.g_broken_partners = 0
+		self.g_broken_partners = []
 		self.broken_partners_by_dead = 0
-		self.g_broken_partners_by_dead = 0
+		self.g_broken_partners_by_dead = []
 		self.time_out_by_age = {}
+		self.g_y_time_out_by_age = []
 		self.g_time_out_by_age = {}
 		self.lovers = 0
-		self.g_lovers = 0
+		self.g_lovers = []
 		self.g_t = 1
 		self.current_t = 0
+		self.important_years = []
+		self.max_y_live_persons = []
+		self.max_y_death_persons = []
 
 	def analize(self, person: Person, type_, t):
 		'''
@@ -43,6 +49,7 @@ class Collector:
 			self.current_t = int(t/12)
 			# TODO guarda en bd con el anno de los datos recogidos
 			self.close_year(t)
+			self.important_years.append(self.current_t)
 
 		if type_ == 1:
 			if person.age in self.dead_by_age:
@@ -86,17 +93,27 @@ class Collector:
 		print('Numero de rupturas', self.broken_partners)
 		print('Tiempo de espera de las parejas', self.time_out_by_age)
 
+		self.max_y_death_persons.append(self.woman_death+ self.man_death)
+		self.max_y_live_persons.append(self.woman+ self.man)
+
 		self.g_woman_death.append(self.woman_death)
 		self.g_man_death.append(self.man_death)
 
 		self.g_y_dead_by_age.append(self.dead_by_age)
 
+		self.g_y_time_out_by_age.append(self.time_out_by_age)
+		self.time_out_by_age = {}
 		self.g_woman.append(self.woman)
 		self.g_man.append(self.man)
 
-		self.g_broken_partners += self.broken_partners
-		self.g_lovers += self.lovers
-		self.g_broken_partners_by_dead += self.broken_partners_by_dead
+		self.man_count += self.man
+		self.woman_count += self.woman
+
+		self.g_broken_partners.append(self.broken_partners)
+		self.g_lovers.append(self.lovers)
+		self.g_broken_partners_by_dead.append(self.broken_partners_by_dead)
+
+
 
 		for key in self.dead_by_age.keys():
 			if key in self.g_dead_by_age:

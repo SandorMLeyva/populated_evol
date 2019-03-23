@@ -5,22 +5,120 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <title>Simulacion</title>
 </head>
-<body>
+<body style="text-align: center">
+<h1>Resumen de la evolución del poblado</h1>
+<br>
+<br>
+<div class="container">
 
     <div id="app">
-        <h1 v-on:click="chart_woman()">click aqui para las mujeres</h1>
-        <h1 v-on:click="chart_man()">click aqui para los hombres</h1>
-        <h1 v-on:click="death_by_age()">muerte por edad del anno [[ year ]]</h1>
-        <h1 v-on:click="next_year()">[[ year ]]</h1>
-        <h1 v-on:click="borns_man()">Nacidos hombres</h1>
-        <h1 v-on:click="borns_woman()">Nacidos mujeres</h1>
 
-        <woman_death></woman_death>
-        <man_death></man_death>
-        <man_born></man_born>
-        <woman_born></woman_born>
-        <death_by_age></death_by_age>
+         <div class="row">
+
+            <div class="col-md-6">
+                <h5>Nacidos por años (Años X Cantidad de Nacidos)</h5>
+                <max_born></max_born>
+            </div>
+
+             <div class="col-md-6">
+                <h5>Muertos por años (Años X Cantidad de Muertos)</h5>
+                <max_death></max_death>
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+        <div class="row">
+            <h4>Muertes</h4>
+            <div class="col-md-6">
+                <h5>Mujeres (Años X Cantidad de Muertos)</h5>
+                <woman_death></woman_death>
+            </div>
+            <div class="col-md-6">
+                <h5>Hombres (Años X Cantidad de Muertos)</h5>
+                <man_death></man_death>
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+        <div class="row">
+            <h4>Nacidos</h4>
+            <div class="col-md-6">
+                <h5>Mujeres (Años X Cantidad de Nacidos)</h5>
+                <woman_born></woman_born>
+            </div>
+            <div class="col-md-6">
+                <h5>Hombres (Años X Cantidad de Nacidos)</h5>
+               <man_born></man_born>
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+        <p>
+            <button v-on:click="prev_year()" type="button" class="btn btn-lg btn-info">Año anterior</button>
+            <button v-on:click="next_year()" type="button" class="btn btn-lg btn-info">Año siguiente</button>
+        </p>
+        <h1 >[[ year ]]</h1>
+        <div class="row">
+            <h4>Por años</h4>
+            <div class="col-md-6">
+                <h5>Muertes por edad (Edad X Cantidad de Muertos)</h5>
+                <death_by_age></death_by_age>
+            </div>
+            <div class="col-md-6">
+                <h5>Tiempo promedio de espera despues de ruptura de una relación (Edad X Cantidad de Ruptura) </h5>
+                <timeout></timeout>
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Muertes por edades de todo el año (Edad X Cantidad de Muertos)</h5>
+                <death_by_age_all></death_by_age_all>
+            </div>
+            <div class="col-md-6">
+                <h5>Cantidad de hombres vs cantidad de mujeres nacidos (Mujeres y Hombres X Cantidad de Nacidos)</h5>
+                <man_vs_woman></man_vs_woman>
+            </div>
+        </div>
+
+        <hr>
+        <br>
+
+          <div class="row" style="text-align: center">
+            <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <h5>Parejas formadas (Año X Cantidad)</h5>
+                <lovers></lovers>
+              </div>
+
+        </div>
+
+        <hr>
+        <br>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Personas viudas</h5>
+                <widow></widow>
+            </div>
+            <div class="col-md-6">
+                <h5>Parejas rotas</h5>
+                <broken_partners></broken_partners>
+            </div>
+        </div>
+
     </div>
+</div>
 
     <script src="{{ url_for('static', filename='js/Chart.min.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/vue.js') }}" type="text/javascript"></script>

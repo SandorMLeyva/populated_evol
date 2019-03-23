@@ -66,7 +66,7 @@ class Person:
 		:param person:
 		:return:
 		'''
-        if self.partner is None and person.partner is None and self.looking_couple and person.looking_couple and self.gender != person.gender:
+        if self.age > 12 and person.age > 12 and self.partner is None and person.partner is None and self.looking_couple and person.looking_couple and self.gender != person.gender:
             prob = MATCH[get_key_by_age(abs(self.age - person.age), MATCH)]
             relationship = prob >= self.generate_uniform_var
             if relationship:
