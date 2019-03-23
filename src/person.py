@@ -113,6 +113,7 @@ class Person:
     def generate_uniform_var(self):
         return np.random.uniform()
 
+    # TODO ver bien que parametros son los buenos puse 1/lambda pq es lo que mejores resultados me daba
     @staticmethod
     def generate_exp_var(lambd):
         return abs(-(1 / (1/lambd)) * np.log(np.random.uniform()))
